@@ -39,7 +39,7 @@ public class orangeHRMTest {
 
         loginBtn.click();
 
-        Thread.sleep(5000);
+        Thread.sleep(7000);
 
 
     }
