@@ -1,5 +1,7 @@
 package tests;
 
+import Pages.LoginPage.LoginPage;
+import Pages.LoginPage.LoginPageActions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -8,39 +10,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import support.webdriver.WebDriverClass;
 
-public class orangeHRMTest {
+public class orangeHRMTest extends WebDriverClass {
 
-    @Test(priority = 1, description = "Login to OrangeHRM", dependsOnMethods = "")
+    @Test(priority = 1, description = "Login to OrangeHRM")
     public void orangeTest() throws InterruptedException {
 
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver driver = new ChromeDriver();
+        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPageActions loginPageActions = new LoginPageActions();
 
-        Dimension size = new Dimension(1350,750);
-
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-
-        driver.manage().window().setSize(size);
+        loginPageActions.LoginToOrangeHRM(loginPage,"Admin","admin123");
 
         Thread.sleep(9000);
 
-        System.out.println(driver.getTitle());
+        System.out.println(getDriver().getTitle());
 
-        WebElement username = driver.findElement(By.cssSelector("input[name=\"username\"]"));
-
-        username.sendKeys("Admin");
-
-        WebElement password = driver.findElement(By.cssSelector("input[name=\"password\"]"));
-
-        password.sendKeys("admin123");
-
-        WebElement loginBtn = driver.findElement(By.cssSelector("button[type=\"submit\"]"));
-
-        loginBtn.click();
-
-        Thread.sleep(7000);
-
+        Thread.sleep(2000);
 
     }
 
